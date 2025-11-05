@@ -1,0 +1,329 @@
+
+********************************************************************************
+********************************************************************************
+**                                                                            **
+**                      YACSIM Version 2.0, 3/6/93                            **
+**                                                                            **
+**            Copyright 1993 by Rice University, Houston, Texas               **
+**                                                                            **
+**        Send comments to: J. Robert Jump, ECE Dept., Rice University        **
+**       P.O. Box 1892, Houston, TX 77251; (713) 527-8101; jrj@rice.edu       **
+**                                                                            **
+********************************************************************************
+********************************************************************************
+
+**************************************************************************
+NUM_PROCESSORS: 1  CPU_DELAY: 0  MEM_DELAY: 40  MODE: CHUNK  NUM_ELEMENTS: 32
+***************************************************************************
+Base Physical Address: 0x407120
+Initializing dataArray0x407120] : 0
+Initializing dataArray0x407124] : 1
+Initializing dataArray0x407128] : 2
+Initializing dataArray0x40712c] : 3
+Initializing dataArray0x407130] : 4
+Initializing dataArray0x407134] : 5
+Initializing dataArray0x407138] : 6
+Initializing dataArray0x40713c] : 7
+Initializing dataArray0x407140] : 8
+Initializing dataArray0x407144] : 9
+Initializing dataArray0x407148] : 10
+Initializing dataArray0x40714c] : 11
+Initializing dataArray0x407150] : 12
+Initializing dataArray0x407154] : 13
+Initializing dataArray0x407158] : 14
+Initializing dataArray0x40715c] : 15
+Initializing dataArray0x407160] : 16
+Initializing dataArray0x407164] : 17
+Initializing dataArray0x407168] : 18
+Initializing dataArray0x40716c] : 19
+Initializing dataArray0x407170] : 20
+Initializing dataArray0x407174] : 21
+Initializing dataArray0x407178] : 22
+Initializing dataArray0x40717c] : 23
+Initializing dataArray0x407180] : 24
+Initializing dataArray0x407184] : 25
+Initializing dataArray0x407188] : 26
+Initializing dataArray0x40718c] : 27
+Initializing dataArray0x407190] : 28
+Initializing dataArray0x407194] : 29
+Initializing dataArray0x407198] : 30
+Initializing dataArray0x40719c] : 31
+Created Trace File "memtrace0"  with 64 records
+Done Creating FrontEnd Controllers 
+Done Creating BackEnd Controllers
+Done Creating Bus Arbiter  Process
+Done Creating Processors
+FrontEndCacheController[0]: Activated at time  0.00
+Bus Arbiter Activated at time   0
+Processor[0]: Activated at time  0.00
+
+Processor 0 makes READ request  Addr: 407120 Time: 0.00
+HandleCacheMiss: Proc 0 Cache MISS Addr: 407120 Time:  0.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time  0.00
+BackEndController[0]: Activated at time  0.00
+BUS GRANT: Time  1.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast BUS_RD Addr: 4223264 Time  1.00
+HandleCacheMiss:Proc 0 MISS handling completed Addr: 407120 Time: 42.00
+LookupCache: Proc 0 Cache Hit Addr: 407120 Time: 42.00
+
+Processor 0 makes WRITE request  Addr: 407120 Write Data: 0 Time: 43.00
+LookupCache: Proc 0 Cache Hit Addr: 407120 Time: 43.00
+LookupCache: Proc 0  UPGRADE  addr 407120 at 43.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 43.00
+BUS GRANT: Time 44.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast INV Addr: 4223264 Time 44.00
+LookupCache: Updated cache Addr: 407120 after completing INV. STATE[0][0]: M Time: 45.00
+
+Processor 0 makes READ request  Addr: 407124 Time:45.00
+LookupCache: Proc 0 Cache Hit Addr: 407124 Time: 45.00
+
+Processor 0 makes WRITE request  Addr: 407124 Write Data: 1 Time: 46.00
+LookupCache: Proc 0 Cache Hit Addr: 407124 Time: 46.00
+
+Processor 0 makes READ request  Addr: 407128 Time:47.00
+LookupCache: Proc 0 Cache Hit Addr: 407128 Time: 47.00
+
+Processor 0 makes WRITE request  Addr: 407128 Write Data: 4 Time: 48.00
+LookupCache: Proc 0 Cache Hit Addr: 407128 Time: 48.00
+
+Processor 0 makes READ request  Addr: 40712c Time:49.00
+LookupCache: Proc 0 Cache Hit Addr: 40712c Time: 49.00
+
+Processor 0 makes WRITE request  Addr: 40712c Write Data: 9 Time: 50.00
+LookupCache: Proc 0 Cache Hit Addr: 40712c Time: 50.00
+
+Processor 0 makes READ request  Addr: 407130 Time:51.00
+LookupCache: Proc 0 Cache Hit Addr: 407130 Time: 51.00
+
+Processor 0 makes WRITE request  Addr: 407130 Write Data: 16 Time: 52.00
+LookupCache: Proc 0 Cache Hit Addr: 407130 Time: 52.00
+
+Processor 0 makes READ request  Addr: 407134 Time:53.00
+LookupCache: Proc 0 Cache Hit Addr: 407134 Time: 53.00
+
+Processor 0 makes WRITE request  Addr: 407134 Write Data: 25 Time: 54.00
+LookupCache: Proc 0 Cache Hit Addr: 407134 Time: 54.00
+
+Processor 0 makes READ request  Addr: 407138 Time:55.00
+LookupCache: Proc 0 Cache Hit Addr: 407138 Time: 55.00
+
+Processor 0 makes WRITE request  Addr: 407138 Write Data: 36 Time: 56.00
+LookupCache: Proc 0 Cache Hit Addr: 407138 Time: 56.00
+
+Processor 0 makes READ request  Addr: 40713c Time:57.00
+LookupCache: Proc 0 Cache Hit Addr: 40713c Time: 57.00
+
+Processor 0 makes WRITE request  Addr: 40713c Write Data: 49 Time: 58.00
+LookupCache: Proc 0 Cache Hit Addr: 40713c Time: 58.00
+
+Processor 0 makes READ request  Addr: 407140 Time:59.00
+HandleCacheMiss: Proc 0 Cache MISS Addr: 407140 Time: 59.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 59.00
+BUS GRANT: Time 60.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast BUS_RD Addr: 4223296 Time 60.00
+HandleCacheMiss:Proc 0 MISS handling completed Addr: 407140 Time: 141.00
+LookupCache: Proc 0 Cache Hit Addr: 407140 Time: 141.00
+
+Processor 0 makes WRITE request  Addr: 407140 Write Data: 64 Time: 142.00
+LookupCache: Proc 0 Cache Hit Addr: 407140 Time: 142.00
+LookupCache: Proc 0  UPGRADE  addr 407140 at 142.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 142.00
+BUS GRANT: Time 143.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast INV Addr: 4223296 Time 143.00
+LookupCache: Updated cache Addr: 407140 after completing INV. STATE[0][0]: M Time: 144.00
+
+Processor 0 makes READ request  Addr: 407144 Time:144.00
+LookupCache: Proc 0 Cache Hit Addr: 407144 Time: 144.00
+
+Processor 0 makes WRITE request  Addr: 407144 Write Data: 81 Time: 145.00
+LookupCache: Proc 0 Cache Hit Addr: 407144 Time: 145.00
+
+Processor 0 makes READ request  Addr: 407148 Time:146.00
+LookupCache: Proc 0 Cache Hit Addr: 407148 Time: 146.00
+
+Processor 0 makes WRITE request  Addr: 407148 Write Data: 100 Time: 147.00
+LookupCache: Proc 0 Cache Hit Addr: 407148 Time: 147.00
+
+Processor 0 makes READ request  Addr: 40714c Time:148.00
+LookupCache: Proc 0 Cache Hit Addr: 40714c Time: 148.00
+
+Processor 0 makes WRITE request  Addr: 40714c Write Data: 121 Time: 149.00
+LookupCache: Proc 0 Cache Hit Addr: 40714c Time: 149.00
+
+Processor 0 makes READ request  Addr: 407150 Time:150.00
+LookupCache: Proc 0 Cache Hit Addr: 407150 Time: 150.00
+
+Processor 0 makes WRITE request  Addr: 407150 Write Data: 144 Time: 151.00
+LookupCache: Proc 0 Cache Hit Addr: 407150 Time: 151.00
+
+Processor 0 makes READ request  Addr: 407154 Time:152.00
+LookupCache: Proc 0 Cache Hit Addr: 407154 Time: 152.00
+
+Processor 0 makes WRITE request  Addr: 407154 Write Data: 169 Time: 153.00
+LookupCache: Proc 0 Cache Hit Addr: 407154 Time: 153.00
+
+Processor 0 makes READ request  Addr: 407158 Time:154.00
+LookupCache: Proc 0 Cache Hit Addr: 407158 Time: 154.00
+
+Processor 0 makes WRITE request  Addr: 407158 Write Data: 196 Time: 155.00
+LookupCache: Proc 0 Cache Hit Addr: 407158 Time: 155.00
+
+Processor 0 makes READ request  Addr: 40715c Time:156.00
+LookupCache: Proc 0 Cache Hit Addr: 40715c Time: 156.00
+
+Processor 0 makes WRITE request  Addr: 40715c Write Data: 225 Time: 157.00
+LookupCache: Proc 0 Cache Hit Addr: 40715c Time: 157.00
+
+Processor 0 makes READ request  Addr: 407160 Time:158.00
+HandleCacheMiss: Proc 0 Cache MISS Addr: 407160 Time: 158.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 158.00
+BUS GRANT: Time 159.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast BUS_RD Addr: 4223328 Time 159.00
+HandleCacheMiss:Proc 0 MISS handling completed Addr: 407160 Time: 240.00
+LookupCache: Proc 0 Cache Hit Addr: 407160 Time: 240.00
+
+Processor 0 makes WRITE request  Addr: 407160 Write Data: 256 Time: 241.00
+LookupCache: Proc 0 Cache Hit Addr: 407160 Time: 241.00
+LookupCache: Proc 0  UPGRADE  addr 407160 at 241.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 241.00
+BUS GRANT: Time 242.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast INV Addr: 4223328 Time 242.00
+LookupCache: Updated cache Addr: 407160 after completing INV. STATE[0][0]: M Time: 243.00
+
+Processor 0 makes READ request  Addr: 407164 Time:243.00
+LookupCache: Proc 0 Cache Hit Addr: 407164 Time: 243.00
+
+Processor 0 makes WRITE request  Addr: 407164 Write Data: 289 Time: 244.00
+LookupCache: Proc 0 Cache Hit Addr: 407164 Time: 244.00
+
+Processor 0 makes READ request  Addr: 407168 Time:245.00
+LookupCache: Proc 0 Cache Hit Addr: 407168 Time: 245.00
+
+Processor 0 makes WRITE request  Addr: 407168 Write Data: 324 Time: 246.00
+LookupCache: Proc 0 Cache Hit Addr: 407168 Time: 246.00
+
+Processor 0 makes READ request  Addr: 40716c Time:247.00
+LookupCache: Proc 0 Cache Hit Addr: 40716c Time: 247.00
+
+Processor 0 makes WRITE request  Addr: 40716c Write Data: 361 Time: 248.00
+LookupCache: Proc 0 Cache Hit Addr: 40716c Time: 248.00
+
+Processor 0 makes READ request  Addr: 407170 Time:249.00
+LookupCache: Proc 0 Cache Hit Addr: 407170 Time: 249.00
+
+Processor 0 makes WRITE request  Addr: 407170 Write Data: 400 Time: 250.00
+LookupCache: Proc 0 Cache Hit Addr: 407170 Time: 250.00
+
+Processor 0 makes READ request  Addr: 407174 Time:251.00
+LookupCache: Proc 0 Cache Hit Addr: 407174 Time: 251.00
+
+Processor 0 makes WRITE request  Addr: 407174 Write Data: 441 Time: 252.00
+LookupCache: Proc 0 Cache Hit Addr: 407174 Time: 252.00
+
+Processor 0 makes READ request  Addr: 407178 Time:253.00
+LookupCache: Proc 0 Cache Hit Addr: 407178 Time: 253.00
+
+Processor 0 makes WRITE request  Addr: 407178 Write Data: 484 Time: 254.00
+LookupCache: Proc 0 Cache Hit Addr: 407178 Time: 254.00
+
+Processor 0 makes READ request  Addr: 40717c Time:255.00
+LookupCache: Proc 0 Cache Hit Addr: 40717c Time: 255.00
+
+Processor 0 makes WRITE request  Addr: 40717c Write Data: 529 Time: 256.00
+LookupCache: Proc 0 Cache Hit Addr: 40717c Time: 256.00
+
+Processor 0 makes READ request  Addr: 407180 Time:257.00
+HandleCacheMiss: Proc 0 Cache MISS Addr: 407180 Time: 257.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 257.00
+BUS GRANT: Time 258.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast BUS_RD Addr: 4223360 Time 258.00
+HandleCacheMiss:Proc 0 MISS handling completed Addr: 407180 Time: 339.00
+LookupCache: Proc 0 Cache Hit Addr: 407180 Time: 339.00
+
+Processor 0 makes WRITE request  Addr: 407180 Write Data: 576 Time: 340.00
+LookupCache: Proc 0 Cache Hit Addr: 407180 Time: 340.00
+LookupCache: Proc 0  UPGRADE  addr 407180 at 340.00
+MakeBusRequest: Proc 0 asserts  BUS REQUEST Time 340.00
+BUS GRANT: Time 341.00.  BUS_GRANT[0]: TRUE
+MakeBusRequest: Proc 0 BUS GRANT. Broadcast INV Addr: 4223360 Time 341.00
+LookupCache: Updated cache Addr: 407180 after completing INV. STATE[0][0]: M Time: 342.00
+
+Processor 0 makes READ request  Addr: 407184 Time:342.00
+LookupCache: Proc 0 Cache Hit Addr: 407184 Time: 342.00
+
+Processor 0 makes WRITE request  Addr: 407184 Write Data: 625 Time: 343.00
+LookupCache: Proc 0 Cache Hit Addr: 407184 Time: 343.00
+
+Processor 0 makes READ request  Addr: 407188 Time:344.00
+LookupCache: Proc 0 Cache Hit Addr: 407188 Time: 344.00
+
+Processor 0 makes WRITE request  Addr: 407188 Write Data: 676 Time: 345.00
+LookupCache: Proc 0 Cache Hit Addr: 407188 Time: 345.00
+
+Processor 0 makes READ request  Addr: 40718c Time:346.00
+LookupCache: Proc 0 Cache Hit Addr: 40718c Time: 346.00
+
+Processor 0 makes WRITE request  Addr: 40718c Write Data: 729 Time: 347.00
+LookupCache: Proc 0 Cache Hit Addr: 40718c Time: 347.00
+
+Processor 0 makes READ request  Addr: 407190 Time:348.00
+LookupCache: Proc 0 Cache Hit Addr: 407190 Time: 348.00
+
+Processor 0 makes WRITE request  Addr: 407190 Write Data: 784 Time: 349.00
+LookupCache: Proc 0 Cache Hit Addr: 407190 Time: 349.00
+
+Processor 0 makes READ request  Addr: 407194 Time:350.00
+LookupCache: Proc 0 Cache Hit Addr: 407194 Time: 350.00
+
+Processor 0 makes WRITE request  Addr: 407194 Write Data: 841 Time: 351.00
+LookupCache: Proc 0 Cache Hit Addr: 407194 Time: 351.00
+
+Processor 0 makes READ request  Addr: 407198 Time:352.00
+LookupCache: Proc 0 Cache Hit Addr: 407198 Time: 352.00
+
+Processor 0 makes WRITE request  Addr: 407198 Write Data: 900 Time: 353.00
+LookupCache: Proc 0 Cache Hit Addr: 407198 Time: 353.00
+
+Processor 0 makes READ request  Addr: 40719c Time:354.00
+LookupCache: Proc 0 Cache Hit Addr: 40719c Time: 354.00
+
+Processor 0 makes WRITE request  Addr: 40719c Write Data: 961 Time: 355.00
+LookupCache: Proc 0 Cache Hit Addr: 40719c Time: 355.00
+
+Processor: 0	SILENT READ HITS: 28	READ MISSES: 4	SILENT WRITE HITS: 28	UPGRADES: 4	WRITE MISSES: 0	WRITEBACKS: 3	Num  UPGRADES converted to BUSRDX: 0	Time: 356.00
+Simulation ended  at 356.00
+
+
+TOTALS: SILENT READ HITS: 28	READ MISSES: 4	SILENT WRITE HITS: 28	UPGRADES: 4	WRITE MISSES: 0	WRITEBACKS: 3	Time: 356.00	Number UPGRADES  Converted to BUSRDX: 0
+dataArray[0x407120] : 0
+dataArray[0x407124] : 1
+dataArray[0x407128] : 4
+dataArray[0x40712c] : 9
+dataArray[0x407130] : 16
+dataArray[0x407134] : 25
+dataArray[0x407138] : 36
+dataArray[0x40713c] : 49
+dataArray[0x407140] : 64
+dataArray[0x407144] : 81
+dataArray[0x407148] : 100
+dataArray[0x40714c] : 121
+dataArray[0x407150] : 144
+dataArray[0x407154] : 169
+dataArray[0x407158] : 196
+dataArray[0x40715c] : 225
+dataArray[0x407160] : 256
+dataArray[0x407164] : 289
+dataArray[0x407168] : 324
+dataArray[0x40716c] : 361
+dataArray[0x407170] : 400
+dataArray[0x407174] : 441
+dataArray[0x407178] : 484
+dataArray[0x40717c] : 529
+dataArray[0x407180] : 24
+dataArray[0x407184] : 25
+dataArray[0x407188] : 26
+dataArray[0x40718c] : 27
+dataArray[0x407190] : 28
+dataArray[0x407194] : 29
+dataArray[0x407198] : 30
+dataArray[0x40719c] : 31
