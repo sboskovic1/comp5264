@@ -10,7 +10,7 @@
 #define MAX_NUM_PROCESSORS 32
 #define CHUNK  1  
 #define INTERLEAVE 0
-#define MAX_SIMULATION_TIME   1500.0 // 10000000.0   // Change to a large number like 10000000.0
+#define MAX_SIMULATION_TIME   10000000.0 // 10000000.0   // Change to a large number like 10000000.0
 
 
 #define STRING1 "UPGRADE"
@@ -20,7 +20,7 @@
 #define DEBUG FALSE
 #define BUSTRACE FALSE
 
-#define TOTALSIZE     32 //  Change to 12800 for experiments
+#define TOTALSIZE     12800 //  Change to 12800 for experiments
 #define MINDELAY 0
 
 

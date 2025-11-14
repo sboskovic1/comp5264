@@ -69,7 +69,7 @@ void BackEndController() {
 
   while (1) {
 
-    SemaphoreWait(sem_bussnoop[procId]); // Wait for  a bus command
+    SemaphoreWait(sem_bussnoop[procId]); // Wait for a bus command
       if (BUSTRACE)
       printf("BusSnooper[%d] --  Woken with Bus COMMAND  at time %5.2f\n", procId, GetSimTime());
 
@@ -101,29 +101,60 @@ void BackEndController() {
   
 	 ************************************************************************************ */
 
+    busreq_type = BROADCAST_CMD.reqtype;
+    address = BROADCAST_CMD.address;
+    broadcast_tag = (address >> (BLKSIZE + CACHEBITS)) / CACHESIZE;
+    blkNum = (address >> BLKSIZE) % CACHESIZE;
+
 
     if (BUS_GRANT[procId] == TRUE)  { // My own Front End  initiated this request
 
+
+      BUS_GRANT[procId] = FALSE;
+
       switch (busreq_type) {  
    
-      case (INV): {
+        case (INV): {
+            if (CACHE[procId][blkNum].STATE == SM) {
+                // Upgrade privilege
+                CACHE[procId][blkNum].STATE = M;
+            }
+            break;
+        }
 
-	break;
-      }
+        case (BUS_RD): {
 
-      case (BUS_RD): {
-	
-	ProcessDelay(epsilon);   
+            if (CACHE[procId][blkNum].STATE == M) {
+                // cache miss and writeback
+                int addr = (int)( (CACHE[procId][blkNum].TAG << (BLKSIZE + CACHEBITS)) | (blkNum << BLKSIZE) );
+                writebackMemory(addr & BLKMASK, CACHE[procId][blkNum].DATA);
+                ProcessDelay(MEM_CYCLE_TIME);
+                cache_writebacks[procId]++;
+            }
+            ProcessDelay(epsilon);
+            readFromMemory(address & BLKMASK, CACHE[procId][blkNum].DATA);
+            ProcessDelay(MEM_CYCLE_TIME);
+            CACHE[procId][blkNum].STATE = S;
+            CACHE[procId][blkNum].TAG = broadcast_tag;
+            break;
+        }
 
-	break;
-      }
+        case (BUS_RDX): {
 
-      case (BUS_RDX): {
-	
-	ProcessDelay(epsilon);
-
-	break;
-      }
+            if (CACHE[procId][blkNum].STATE == M) {
+                // cache miss and writeback
+                int addr = (int)( (CACHE[procId][blkNum].TAG << (BLKSIZE + CACHEBITS)) | (blkNum << BLKSIZE) );
+                writebackMemory(addr & BLKMASK, CACHE[procId][blkNum].DATA);
+                ProcessDelay(MEM_CYCLE_TIME);
+                cache_writebacks[procId]++;
+            }
+            ProcessDelay(epsilon);
+            readFromMemory(address & BLKMASK, CACHE[procId][blkNum].DATA);
+            ProcessDelay(MEM_CYCLE_TIME);
+            CACHE[procId][blkNum].STATE = M;
+            CACHE[procId][blkNum].TAG = broadcast_tag;
+            break;
+        }
       }
       
       ProcessDelay(CLOCK_CYCLE);
@@ -153,24 +184,55 @@ void BackEndController() {
     
     // Check for valid block in the cache; else ignore command and continue.
 
-    switch (busreq_type) { // Handling command from other processor for a valis block in my cache
+    // printf("backend\n");
+    if (CACHE[procId][blkNum].TAG != broadcast_tag || CACHE[procId][blkNum].STATE == I) {
+        // printf("not matching tag\n");
+        SemaphoreSignal(sem_bussnoopdone[procId]);   // Uncomment Signal for actual code
+        continue;
+    }
+
+    switch (busreq_type) { // Handling command from other processor for a valid block in my cache
+
     
-    case (INV): {
-      
-      break;
-    }
-    case (BUS_RD): {
-      
-      break;
-    }  
-    case (BUS_RDX): {
-      
-      break;
-    }
+        case (INV): { // should never happen if block is in modified state
+            // set block state to invalid locally 
+            if (CACHE[procId][blkNum].STATE == SM) {
+                numUtoX[procId]++;
+            }
+            CACHE[procId][blkNum].STATE = I;
+            break;
+        }
+        case (BUS_RD): {
+            // another processor wants to read this block
+            if (CACHE[procId][blkNum].STATE == M) {
+                // writeback to memory
+                CACHE[procId][blkNum].STATE = S;
+                int addr = (int)( (CACHE[procId][blkNum].TAG << (BLKSIZE + CACHEBITS)) | (blkNum << BLKSIZE) );
+                writebackMemory(addr & BLKMASK, CACHE[procId][blkNum].DATA);
+                ProcessDelay(MEM_CYCLE_TIME);
+            }
+            break;
+        }  
+        case (BUS_RDX): {
+            // another processor wants to write this block
+            if (CACHE[procId][blkNum].STATE == M) {
+                // writeback to memory and invalidate
+                CACHE[procId][blkNum].STATE = I;
+                int addr = (int)( (CACHE[procId][blkNum].TAG << (BLKSIZE + CACHEBITS)) | (blkNum << BLKSIZE) );
+                writebackMemory(addr & BLKMASK, CACHE[procId][blkNum].DATA);
+                ProcessDelay(MEM_CYCLE_TIME);
+            } else if (CACHE[procId][blkNum].STATE == SM) {
+                numUtoX[procId]++;
+                CACHE[procId][blkNum].STATE = I;
+            } else if (CACHE[procId][blkNum].STATE == S) {
+                CACHE[procId][blkNum].STATE = I;
+            }
+            break;
+        }
     }
 
     ProcessDelay(CLOCK_CYCLE);   
-    //  SemaphoreSignal(sem_bussnoopdone[procId]);   // Uncomment Signal for actual code
+    SemaphoreSignal(sem_bussnoopdone[procId]);   // Uncomment Signal for actual code
   }
 }
 

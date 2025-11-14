@@ -132,58 +132,59 @@ int LookupCache(int procId, struct genericQueueEntry *req) {
   if ((CACHE[procId][blkNum].TAG == myTag) &&  (CACHE[procId][blkNum].STATE != I)) {   // Cache Hit
     if (TRACE)
       printf("LookupCache: Proc %d Cache Hit Addr: %x Time: %5.2f\n", procId,req->address,GetSimTime());
+
     
   switch (CACHE[procId][blkNum].STATE) {
-  case M: { // Silent Transaction
-    switch(op) {
-    case LOAD: 
-      cache_read_hits[procId]++;  // Read Hits Counter
-      req->data =  CACHE[procId][blkNum].DATA[wordOffset];// Read requested word from cache
-      break;
-      
-    case STORE: 
-      cache_write_hits[procId]++;  // Write Hits Counter      
-      CACHE[procId][blkNum].DATA[wordOffset] =  req->data;  // Write word to cache 
-      if (DEBUG)
-	displayCacheBlock(procId, blkNum);
-      break;
+    case M: { // Silent Transaction
+        switch(op) {
+        case LOAD: 
+        cache_read_hits[procId]++;  // Read Hits Counter
+        req->data =  CACHE[procId][blkNum].DATA[wordOffset];// Read requested word from cache
+        break;
+        
+        case STORE: 
+        cache_write_hits[procId]++;  // Write Hits Counter      
+        CACHE[procId][blkNum].DATA[wordOffset] =  req->data;  // Write word to cache 
+        if (DEBUG)
+        displayCacheBlock(procId, blkNum);
+        break;
+        }
+        ProcessDelay(CLOCK_CYCLE);  // Fixed delay to process Cache Hit in M state (mem.c)
+        break;
     }
-    ProcessDelay(CLOCK_CYCLE);  // Fixed delay to process Cache Hit in M state (mem.c)
-    break;
-  }
-    
-  case S: { 
-    switch(op) {
-    case LOAD:                                    
-      cache_read_hits[procId]++; // Read Hits Counter
-      req->data =  CACHE[procId][blkNum].DATA[wordOffset];  // Read reequested word from cache
-      ProcessDelay(CLOCK_CYCLE);  // Delay to process Cache Hit in S state (mem.c)
-      break;
-      
-    case STORE:
-      if (TRACE)
-	printf("LookupCache: Proc %d  UPGRADE  addr %x at %5.2f\n", procId,req->address,GetSimTime());
-      cache_upgrades[procId]++;   // UPGRADE counter	
-      CACHE[procId][blkNum].STATE = SM; // Transient state
-      
-      MakeBusRequest(procId, req); // Wait for handling of INV request
-      if (CACHE[procId][blkNum].STATE != M) { 
-	printf("LookupCache: ERROR State after serving INV is not M. Time: %5.2f\n", GetSimTime());
-	exit(1);
-      };
-      
-      CACHE[procId][blkNum].DATA[wordOffset] = req->data; // Write the word to cache
-      if (TRACE) {
-	printf("LookupCache: Updated cache Addr: %x after completing INV. STATE[%d][%d]: %s Time: %5.2f\n", req->address, procId, blkNum, f(CACHE[procId][blkNum].STATE), GetSimTime());
-      }
-      if (DEBUG)
-	displayCacheBlock(procId, blkNum);
-      
-      releaseBus(procId);  // Safe to allow the next bus transaction
-      break;
+        
+    case S: { 
+        switch(op) {
+        case LOAD:                                    
+        cache_read_hits[procId]++; // Read Hits Counter
+        req->data =  CACHE[procId][blkNum].DATA[wordOffset];  // Read reequested word from cache
+        ProcessDelay(CLOCK_CYCLE);  // Delay to process Cache Hit in S state (mem.c)
+        break;
+        
+        case STORE:
+        if (TRACE)
+        printf("LookupCache: Proc %d  UPGRADE  addr %x at %5.2f\n", procId,req->address,GetSimTime());
+        cache_upgrades[procId]++;   // UPGRADE counter	
+        CACHE[procId][blkNum].STATE = SM; // Transient state
+        
+        MakeBusRequest(procId, req); // Wait for handling of INV request
+        if (CACHE[procId][blkNum].STATE != M) { 
+        printf("LookupCache: ERROR State after serving INV is not M. Time: %5.2f\n", GetSimTime());
+        exit(1);
+        };
+        
+        CACHE[procId][blkNum].DATA[wordOffset] = req->data; // Write the word to cache
+        if (TRACE) {
+        printf("LookupCache: Updated cache Addr: %x after completing INV. STATE[%d][%d]: %s Time: %5.2f\n", req->address, procId, blkNum, f(CACHE[procId][blkNum].STATE), GetSimTime());
+        }
+        if (DEBUG)
+        displayCacheBlock(procId, blkNum);
+        
+        releaseBus(procId);  // Safe to allow the next bus transaction
+        break;
+        }
+        break;
     }
-    break;
-  }
   }
   
   return(TRUE);  // Cache Hit serviced 
